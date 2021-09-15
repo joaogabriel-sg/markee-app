@@ -4,7 +4,7 @@ type ContainerProps = {
   isActive: boolean
 }
 
-export const Container = styled.li<ContainerProps>`
+export const Container = styled.li<ContainerProps>`${({ theme, isActive }) => css`
   padding: 0.8rem 1.4rem;
   border-radius: 6px;
 
@@ -16,7 +16,7 @@ export const Container = styled.li<ContainerProps>`
   transition: background 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
   &:hover {
-    background: ${({ theme }) => theme.colors.lightBlack};
+    background: ${theme.colors.lightBlack};
     opacity: 1;
   }
 
@@ -36,11 +36,11 @@ export const Container = styled.li<ContainerProps>`
     }
   }
 
-  ${({ isActive }) => isActive && css`
-    background: ${({ theme }) => theme.colors.lightBlack};
+  ${isActive && css`
+    background: ${theme.colors.lightBlack};
     opacity: 1;
   `}
-`
+`}`
 
 export const Link = styled.a`
   width: 100%;

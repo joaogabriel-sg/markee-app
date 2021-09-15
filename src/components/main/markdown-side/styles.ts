@@ -1,21 +1,21 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components/macro'
 
-export const Container = styled.section`
+export const Container = styled.section`${({ theme }) => css`
   margin-bottom: 4rem;
 
-  @media (min-width: 920px) {
+  @media (min-width: ${theme.mediaQuery.mq920}) {
     min-width: 50%;
     max-width: 50%;
     flex-shrink: 0;
 
     padding-right: 3.2rem;
-    border-right: 1px solid ${({ theme }) => theme.colors.gray};
+    border-right: 1px solid ${theme.colors.gray};
     margin-bottom: 0;
   }
-`
+`}`
 
-export const MarkdownTextarea = styled.textarea`
-  background: ${({ theme }) => theme.colors.white};
+export const MarkdownTextarea = styled.textarea`${({ theme }) => css`
+  background: ${theme.colors.white};
   width: 100%;
   min-height: 32rem;
   resize: none;
@@ -28,14 +28,14 @@ export const MarkdownTextarea = styled.textarea`
   font-size: 1.6rem;
   font-weight: 500;
   line-height: 1.5;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${theme.colors.black};
 
   &::-webkit-scrollbar {
     width: 4px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.colors.gray};
+    background: ${theme.colors.gray};
     border-radius: 4px;
   }
 
@@ -43,7 +43,7 @@ export const MarkdownTextarea = styled.textarea`
     background: transparent;
   }
 
-  @media(min-width: 920px) {
+  @media(min-width: ${theme.mediaQuery.mq920}) {
     height: 100%;
     padding-right: 0;
 
@@ -53,4 +53,4 @@ export const MarkdownTextarea = styled.textarea`
       display: none;
     }
   }
-`
+`}`

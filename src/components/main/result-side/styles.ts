@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components/macro'
 
-export const Container = styled.section`
-  color: ${({ theme }) => theme.colors.black};
+export const Container = styled.section`${({ theme }) => css`
+  color: ${theme.colors.black};
 
   @media (min-width: 920px) {
     min-width: 50%;
@@ -9,9 +9,9 @@ export const Container = styled.section`
     flex-shrink: 0;
 
     padding-left: 3.2rem;
-    border-left: 1px solid ${({ theme }) => theme.colors.gray};
+    border-left: 1px solid ${theme.colors.gray};
   }
-`
+`}`
 
 export const Title = styled.h2`
   font-size: 3.2rem;
