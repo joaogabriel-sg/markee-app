@@ -5,4 +5,9 @@ export const Container = styled.div`
   min-height: 100vh;
 
   display: flex;
+  flex-direction: column;
+
+  @media(min-width: 920px) {
+    flex-direction: row;
+  }
 `
