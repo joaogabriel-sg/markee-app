@@ -1,4 +1,5 @@
 import { Filename } from 'components/main/filename'
+import { MarkdownSide } from './markdown-side'
 
 import * as S from './styles'
 
@@ -8,9 +9,7 @@ export function Main () {
       <Filename />
 
       <S.Content>
-        <S.MarkdownSide>
-          <S.MarkdownTextarea placeholder='Digite aqui seu markdown' />
-        </S.MarkdownSide>
+        <MarkdownSide />
         <S.ResultSide>
           <S.ResultTitle>Bootcamp Brainn Co.</S.ResultTitle>
           <S.ResultParagraph>Lorem ipsum dolor sit amet simet</S.ResultParagraph>
