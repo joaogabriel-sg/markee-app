@@ -10,7 +10,7 @@ export const Container = styled.aside`
   align-items: center;
 
   @media(min-width: 920px) {
-    max-width: min(36rem, 30vw);
+    width: 36rem;
     padding: 4.8rem 3.2rem;
   }
 `
@@ -70,10 +70,11 @@ export const AddFileButton = styled.button`
   font-size: 1.4rem;
   color: ${({ theme }) => theme.colors.lightBlack};
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
   &:hover {
     transform: scale(1.02, 1.02);
+    opacity: 0.75;
   }
 `
 
