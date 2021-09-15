@@ -25,6 +25,7 @@ export function Aside () {
             id={file.id}
             name={file.name}
             active={file.active}
+            status={file.status}
           />
         ))}
       </S.Files>

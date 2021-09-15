@@ -65,6 +65,8 @@ export const Name = styled.span`
   text-overflow: ellipsis;
 `
 
+export const StatusIcon = styled.img``
+
 export const DeleteButton = styled.button`
   background: none;
 
@@ -79,5 +81,4 @@ export const DeleteButton = styled.button`
     opacity: 0;
   }
 `
-
 export const DeleteIcon = styled.img``

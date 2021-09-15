@@ -40,6 +40,6 @@ export const files: File[] = [
     name: 'roadmap',
     content: '## Bootcamp Brainn Co.',
     active: true,
-    status: 'editing',
+    status: 'saved',
   },
 ]
