@@ -1,10 +1,11 @@
-import { files } from 'mocks/files'
+import { File } from 'components/aside/file'
 
 import * as S from './styles'
 
 import logoImg from 'assets/logo.svg'
 import plusIcon from 'assets/plus-symbol.svg'
-import { File } from 'components/file'
+
+import { files } from 'mocks/files'
 
 export function Aside () {
   return (

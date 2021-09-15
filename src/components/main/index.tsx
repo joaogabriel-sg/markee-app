@@ -1,4 +1,5 @@
-import { Filename } from 'components/filename'
+import { Filename } from 'components/main/filename'
+
 import * as S from './styles'
 
 export function Main () {
