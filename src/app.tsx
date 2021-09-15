@@ -1,9 +1,13 @@
+import { Aside } from './components/aside'
+import { Main } from 'components/main'
+
 import * as S from './styles/app-styles'
 
 function App () {
   return (
     <S.Container>
-      <h1>Markee App</h1>
+      <Aside />
+      <Main />
     </S.Container>
   )
 }
