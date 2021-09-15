@@ -1,7 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Container = styled.li`
-  background: ${({ theme }) => theme.colors.lightBlack};
+type ContainerProps = {
+  isActive: boolean
+}
+
+export const Container = styled.li<ContainerProps>`
   padding: 0.8rem 1.4rem;
   border-radius: 6px;
 
@@ -13,6 +16,7 @@ export const Container = styled.li`
   transition: background 0.2s ease-in-out, opacity 0.2s ease-in-out;
 
   &:hover {
+    background: ${({ theme }) => theme.colors.lightBlack};
     opacity: 1;
   }
 
@@ -21,23 +25,21 @@ export const Container = styled.li`
   }
 
   @media(min-width: 920px) {
-    background: none;
-
     & + & {
-      margin-top: 1.6rem;
-      margin-left: 0;
+      margin: 1.6rem 0 0 0;
     }
 
     &:hover {
-      background: ${({ theme }) => theme.colors
-    .lightBlack};
-      opacity: 1;
-
       > button {
         opacity: 1;
       }
     }
   }
+
+  ${({ isActive }) => isActive && css`
+    background: ${({ theme }) => theme.colors.lightBlack};
+    opacity: 1;
+  `}
 `
 
 export const Link = styled.a`
