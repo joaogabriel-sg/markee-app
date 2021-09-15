@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from 'styled-components/macro'
 
 type ContainerProps = {
   isActive: boolean
@@ -77,7 +77,7 @@ export const DeleteButton = styled.button`
 
   transition: opacity 0.2s ease-in-out;
 
-  @media(min-width: 920px) {
+  @media(min-width: ${({ theme }) => theme.mediaQuery.mq920}) {
     opacity: 0;
   }
 `

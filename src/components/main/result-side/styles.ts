@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components/macro'
 export const Container = styled.section`${({ theme }) => css`
   color: ${theme.colors.black};
 
-  @media (min-width: 920px) {
+  @media (min-width: ${theme.mediaQuery.mq920}) {
     min-width: 50%;
     max-width: 50%;
     flex-shrink: 0;

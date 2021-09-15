@@ -105,7 +105,7 @@ export const Files = styled.ul`${({ theme }) => css`
     background: ${theme.colors.black};
   }
 
-  @media(min-width: 920px) {
+  @media(min-width: ${theme.mediaQuery.mq920}) {
     width: 100%;
     flex-direction: column;
     overflow-x: initial;
