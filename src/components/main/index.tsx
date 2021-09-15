@@ -1,5 +1,6 @@
 import { Filename } from 'components/main/filename'
 import { MarkdownSide } from './markdown-side'
+import { ResultSide } from './result-side'
 
 import * as S from './styles'
 
@@ -10,10 +11,7 @@ export function Main () {
 
       <S.Content>
         <MarkdownSide />
-        <S.ResultSide>
-          <S.ResultTitle>Bootcamp Brainn Co.</S.ResultTitle>
-          <S.ResultParagraph>Lorem ipsum dolor sit amet simet</S.ResultParagraph>
-        </S.ResultSide>
+        <ResultSide />
       </S.Content>
     </S.Container>
   )
