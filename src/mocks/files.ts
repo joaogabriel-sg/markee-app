@@ -29,14 +29,14 @@ export const files: File[] = [
     status: 'saved',
   },
   {
-    id: 'jahklfsajfhlk12rt90h120t03hf',
+    id: 'afjaojfq-aofhjaojf',
     name: 'Links',
     content: '## Some important links',
     active: false,
     status: 'saved',
   },
   {
-    id: 'jahklfsajfhlk12rt90h120t03hf',
+    id: 'a1ri1fj1-114104-120t03hf',
     name: 'roadmap',
     content: '## Bootcamp Brainn Co.',
     active: true,
