@@ -1,10 +1,12 @@
-import { ThemeProvider, createGlobalStyle } from 'styled-components'
+import { ThemeProvider } from 'styled-components'
+
 import { App } from './app'
-import { theme } from 'resources/theme'
 
 import 'normalize.css'
+import { GlobalStyle } from './styles/global-style'
+import { theme } from './styles/theme'
 
-function Root () {
+export function Root () {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyle />
@@ -12,19 +14,3 @@ function Root () {
     </ThemeProvider>
   )
 }
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    box-sizing: border-box;
-  }
-
-  html {
-    font-size: 62.5%;
-  }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-  }
-`
-
-export { Root }
