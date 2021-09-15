@@ -1,16 +1,10 @@
-import fileBlueIcon from 'assets/file-blue-icon.svg'
-
+import { Filename } from 'components/filename'
 import * as S from './styles'
 
 export function Main () {
   return (
     <S.Container>
-      <S.Header>
-        <S.Label htmlFor='filename'>
-          <S.FileIcon src={fileBlueIcon} alt='Nomear arquivo' />
-        </S.Label>
-        <S.InputFileName type='text' id='filename' defaultValue='roadmap' />
-      </S.Header>
+      <Filename />
 
       <S.Content>
         <S.MarkdownSide>

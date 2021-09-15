@@ -12,29 +12,6 @@ export const Container = styled.main`
   }
 `
 
-export const Header = styled.header`
-  margin-bottom: 4rem;
-  display: flex;
-  align-items: center;
-`
-
-export const Label = styled.label``
-
-export const FileIcon = styled.img`
-  margin-right: 1.6rem;
-`
-
-export const InputFileName = styled.input`
-  background: none;
-  width: 100%;
-  border: none;
-  outline: none;
-
-  font-size: 1.8rem;
-  line-height: 1.5;
-  color: ${({ theme }) => theme.colors.black};
-`
-
 export const Content = styled.div`
   width: 100%;
   display: flex;
