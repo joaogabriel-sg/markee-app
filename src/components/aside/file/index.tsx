@@ -1,3 +1,5 @@
+import { File as TypeFile } from 'resources/types/file.type'
+
 import deleteIcon from 'resources/assets/delete-icon.svg'
 import fileWhiteIcon from 'resources/assets/file-white-icon.svg'
 import fileBlueIcon from 'resources/assets/file-blue-icon.svg'
@@ -7,12 +9,7 @@ import savedIcon from 'resources/assets/saved-icon.svg'
 
 import * as S from './styles'
 
-type FileProps = {
-  id: string
-  name: string
-  active: boolean
-  status: 'editing' |'saving' | 'saved'
-}
+type FileProps = Omit<TypeFile, 'content'>
 
 export function File ({ id, name, active, status }: FileProps) {
   const currentFileIcon = active ? fileBlueIcon : fileWhiteIcon

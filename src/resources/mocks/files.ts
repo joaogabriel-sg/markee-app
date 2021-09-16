@@ -1,10 +1,4 @@
-type File = {
-  id: string
-  name: string
-  content: string
-  active: boolean
-  status: 'editing' |'saving' | 'saved'
-}
+import { File } from 'resources/types/file.type'
 
 export const files: File[] = [
   {
