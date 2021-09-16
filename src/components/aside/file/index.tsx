@@ -1,9 +1,9 @@
-import deleteIcon from 'assets/delete-icon.svg'
-import fileWhiteIcon from 'assets/file-white-icon.svg'
-import fileBlueIcon from 'assets/file-blue-icon.svg'
-import editingIcon from 'assets/editing-icon.svg'
-import savingIcon from 'assets/saving-icon.svg'
-import savedIcon from 'assets/saved-icon.svg'
+import deleteIcon from 'resources/assets/delete-icon.svg'
+import fileWhiteIcon from 'resources/assets/file-white-icon.svg'
+import fileBlueIcon from 'resources/assets/file-blue-icon.svg'
+import editingIcon from 'resources/assets/editing-icon.svg'
+import savingIcon from 'resources/assets/saving-icon.svg'
+import savedIcon from 'resources/assets/saved-icon.svg'
 
 import * as S from './styles'
 

@@ -2,10 +2,10 @@ import { File } from 'components/aside/file'
 
 import * as S from './styles'
 
-import logoImg from 'assets/logo.svg'
-import plusIcon from 'assets/plus-symbol.svg'
+import logoImg from 'resources/assets/logo.svg'
+import plusIcon from 'resources/assets/plus-symbol.svg'
 
-import { files } from 'mocks/files'
+import { files } from 'resources/mocks/files'
 
 export function Aside () {
   return (

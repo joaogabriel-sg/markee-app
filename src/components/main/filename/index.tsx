@@ -1,4 +1,4 @@
-import fileBlueIcon from 'assets/file-blue-icon.svg'
+import fileBlueIcon from 'resources/assets/file-blue-icon.svg'
 
 import * as S from './styles'
 
