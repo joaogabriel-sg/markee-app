@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 
-import { Aside } from './components/aside'
-import { Main } from 'components/main'
+import { Sidebar } from './components/sidebar'
+import { ContentArea } from 'components/content-area'
 
 import * as S from './styles/app-styles'
 
@@ -10,8 +10,8 @@ function App () {
 
   return (
     <S.Container>
-      <Aside inputRef={inputRef} />
-      <Main inputRef={inputRef} />
+      <Sidebar inputRef={inputRef} />
+      <ContentArea inputRef={inputRef} />
     </S.Container>
   )
 }

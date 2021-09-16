@@ -3,18 +3,18 @@ import { v4 as uuidv4 } from 'uuid'
 
 import { File as TypeFile } from 'resources/types/file.type'
 
-import { File } from 'components/aside/file'
+import { File } from 'components/sidebar/file'
 
 import logoImg from 'resources/assets/logo.svg'
 import plusIcon from 'resources/assets/plus-symbol.svg'
 
 import * as S from './styles'
 
-type AsideProps = {
+type SidebarProps = {
   inputRef: RefObject<HTMLInputElement>
 }
 
-export function Aside ({ inputRef }: AsideProps) {
+export function Sidebar ({ inputRef }: SidebarProps) {
   const [files, setFiles] = useState<TypeFile[]>([])
 
   const handleAddNewFile = () => {
