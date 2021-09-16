@@ -33,7 +33,7 @@ yarn
 # 🔥 Usage
 
 ```bash
-npm dev
+npm run dev
 # or
 yarn dev
 ```
