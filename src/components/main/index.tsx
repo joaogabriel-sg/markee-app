@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, RefObject, useState } from 'react'
 
 import { Filename } from 'components/main/filename'
 import { MarkdownSide } from './markdown-side'
@@ -6,7 +6,11 @@ import { ResultSide } from './result-side'
 
 import * as S from './styles'
 
-export function Main () {
+type MainProps = {
+  inputRef: RefObject<HTMLInputElement>
+}
+
+export function Main ({ inputRef }: MainProps) {
   const [content, setContent] = useState('')
 
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -15,7 +19,7 @@ export function Main () {
 
   return (
     <S.Container>
-      <Filename />
+      <Filename inputRef={inputRef} />
 
       <S.Content>
         <MarkdownSide

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, RefObject } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 
 import { File as TypeFile } from 'resources/types/file.type'
@@ -10,7 +10,11 @@ import plusIcon from 'resources/assets/plus-symbol.svg'
 
 import * as S from './styles'
 
-export function Aside () {
+type AsideProps = {
+  inputRef: RefObject<HTMLInputElement>
+}
+
+export function Aside ({ inputRef }: AsideProps) {
   const [files, setFiles] = useState<TypeFile[]>([])
 
   const handleAddNewFile = () => {
@@ -21,6 +25,8 @@ export function Aside () {
       active: true,
       status: 'saved',
     }
+
+    inputRef.current?.focus()
 
     setFiles((prevFiles) => {
       const prevFilesDisabled = prevFiles.map(
