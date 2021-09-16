@@ -11,9 +11,12 @@ import * as S from './styles'
 type ContentAreaProps = {
   inputRef: RefObject<HTMLInputElement>
   currentFile: File
+  changeCurrentFilename: (newFilename: string) => void
 }
 
-export function ContentArea ({ inputRef, currentFile }: ContentAreaProps) {
+export function ContentArea ({
+  inputRef, currentFile, changeCurrentFilename,
+}: ContentAreaProps) {
   const [content, setContent] = useState('')
 
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
@@ -24,7 +27,11 @@ export function ContentArea ({ inputRef, currentFile }: ContentAreaProps) {
     <S.Container>
       {!!currentFile.id && (
         <>
-          <Filename inputRef={inputRef} name={currentFile.name} />
+          <Filename
+            inputRef={inputRef}
+            name={currentFile.name}
+            changeCurrentFilename={changeCurrentFilename}
+          />
 
           <S.Content>
             <MarkdownSide

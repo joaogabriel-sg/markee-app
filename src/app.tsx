@@ -42,10 +42,24 @@ function App () {
     })
   }
 
+  const changeCurrentFilename = (newFilename: string) => {
+    setFiles((prevFiles) =>
+      prevFiles.map((prevFile) =>
+        prevFile.id === currentFile.id
+          ? { ...prevFile, name: newFilename }
+          : prevFile,
+      ),
+    )
+  }
+
   return (
     <S.Container>
       <Sidebar files={files} handleAddNewFile={handleAddNewFile} />
-      <ContentArea inputRef={inputRef} currentFile={currentFile} />
+      <ContentArea
+        inputRef={inputRef}
+        currentFile={currentFile}
+        changeCurrentFilename={changeCurrentFilename}
+      />
     </S.Container>
   )
 }
