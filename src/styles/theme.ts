@@ -8,4 +8,7 @@ export const theme: DefaultTheme = {
     white: '#FAFAFA',
     primary: '#1FC8E1',
   },
+  mediaQuery: {
+    mq920: '920px',
+  },
 }
