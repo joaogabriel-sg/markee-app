@@ -9,15 +9,21 @@ import savedIcon from 'resources/assets/saved-icon.svg'
 
 import * as S from './styles'
 
-type FileProps = Omit<TypeFile, 'content'>
+type FileProps = Omit<TypeFile, 'content'> & {
+  deleteFileById: (id: string) => void
+}
 
-export function File ({ id, name, active, status }: FileProps) {
+export function File ({ id, name, active, status, deleteFileById }: FileProps) {
   const currentFileIcon = active ? fileBlueIcon : fileWhiteIcon
   const currentStatusIcon = status === 'editing'
     ? editingIcon
     : status === 'saving'
       ? savingIcon
       : savedIcon
+
+  const handleDeleteFile = () => {
+    deleteFileById(id)
+  }
 
   return (
     <S.Container key={id} isActive={active}>
@@ -28,7 +34,11 @@ export function File ({ id, name, active, status }: FileProps) {
       {active
         ? (<S.StatusIcon src={currentStatusIcon} alt={`Status: ${status}`} />)
         : (
-          <S.DeleteButton type='button' title={`Remover o arquivo ${name}`}>
+          <S.DeleteButton
+            type='button'
+            onClick={handleDeleteFile}
+            title={`Remover o arquivo ${name}`}
+          >
             <S.DeleteIcon src={deleteIcon} alt={`Deletar arquivo ${name}`} />
           </S.DeleteButton>
           )}

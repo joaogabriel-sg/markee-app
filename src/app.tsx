@@ -76,9 +76,19 @@ function App () {
     }))
   }
 
+  const deleteFileById = (id: string) => {
+    setFiles((prevFiles) => prevFiles.filter(
+      (prevFile) => prevFile.id !== id,
+    ))
+  }
+
   return (
     <S.Container>
-      <Sidebar files={files} handleAddNewFile={handleAddNewFile} />
+      <Sidebar
+        files={files}
+        handleAddNewFile={handleAddNewFile}
+        deleteFileById={deleteFileById}
+      />
       <ContentArea
         inputRef={inputRef}
         currentFile={currentFile}

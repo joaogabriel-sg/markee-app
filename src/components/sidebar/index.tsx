@@ -10,9 +10,14 @@ import * as S from './styles'
 type SidebarProps = {
   files: TypeFile[]
   handleAddNewFile: () => void
+  deleteFileById: (id: string) => void
 }
 
-export function Sidebar ({ files, handleAddNewFile }: SidebarProps) {
+export function Sidebar ({
+  files,
+  handleAddNewFile,
+  deleteFileById,
+}: SidebarProps) {
   return (
     <S.Container>
       <S.LogoImg src={logoImg} alt='Markee App' title='Markee App' />
@@ -32,6 +37,7 @@ export function Sidebar ({ files, handleAddNewFile }: SidebarProps) {
             name={file.name}
             active={file.active}
             status={file.status}
+            deleteFileById={deleteFileById}
           />
         ))}
       </S.Files>
