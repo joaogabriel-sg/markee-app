@@ -10,7 +10,7 @@ import * as S from './styles'
 
 type ContentAreaProps = {
   inputRef: RefObject<HTMLInputElement>
-  currentFile: File
+  currentFile: File | undefined
   changeCurrentFilename: (newFilename: string) => void
   changeCurrentContent: (newContent: string) => void
 }
@@ -27,7 +27,7 @@ export function ContentArea ({
 
   return (
     <S.Container>
-      {!!currentFile.id && (
+      {!!currentFile?.id && (
         <>
           <Filename
             inputRef={inputRef}

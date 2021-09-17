@@ -8,7 +8,6 @@ import * as S from './styles/app-styles'
 function App () {
   const {
     files,
-    currentFile,
     inputRef,
     handleAddNewFile,
     changeCurrentFilename,
@@ -27,7 +26,7 @@ function App () {
       />
       <ContentArea
         inputRef={inputRef}
-        currentFile={currentFile}
+        currentFile={files.find((file) => file.active)}
         changeCurrentFilename={changeCurrentFilename}
         changeCurrentContent={changeCurrentContent}
       />
