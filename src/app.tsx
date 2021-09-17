@@ -14,53 +14,66 @@ function App () {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    if (files.length > 0) {
-      const activeFile =
-        files.find((file) => file.active === true) ?? files[files.length - 1]
+    setFiles((prevFiles) => prevFiles.map(
+      (prevFile) => prevFile.id === currentFile.id
+        ? currentFile
+        : prevFile,
+    ))
 
-      setCurrentFile(activeFile)
+    if (currentFile.status !== 'saved') {
+      const savingStatusTimeoutId = setTimeout(() => {
+        setCurrentFile((prevCurrentFile) => ({
+          ...prevCurrentFile,
+          status: 'saving',
+        }))
+
+        const savedStatusTimeoutId = setTimeout(() => {
+          setCurrentFile((prevCurrentFile) => ({
+            ...prevCurrentFile,
+            status: 'saved',
+          }))
+          clearTimeout(savedStatusTimeoutId)
+        }, 300)
+      }, 300)
+
+      return () => clearTimeout(savingStatusTimeoutId)
     }
-  }, [files])
+  }, [currentFile])
 
   const handleAddNewFile = () => {
-    setFiles((prevFiles) => {
-      const prevFilesDisabled = prevFiles.map(
-        (prevFile) => ({ ...prevFile, active: false }),
-      )
-
-      return [
-        ...prevFilesDisabled,
-        {
-          id: uuidv4(),
-          name: 'Sem título',
-          content: '',
-          active: true,
-          status: 'saved',
-        },
-      ]
-    })
+    const newFile: File = {
+      id: uuidv4(),
+      name: 'Sem título',
+      content: '',
+      active: true,
+      status: 'saved',
+    }
 
     inputRef.current?.focus()
+    setFiles((prevFiles) => {
+      const prevFilesDisabled = prevFiles.map((prevFile) => ({
+        ...prevFile,
+        active: false,
+      }))
+      return [...prevFilesDisabled, newFile]
+    })
+    setCurrentFile(newFile)
   }
 
   const changeCurrentFilename = (newFilename: string) => {
-    setFiles((prevFiles) =>
-      prevFiles.map((prevFile) =>
-        prevFile.id === currentFile.id
-          ? { ...prevFile, name: newFilename }
-          : prevFile,
-      ),
-    )
+    setCurrentFile((prevCurrentFile) => ({
+      ...prevCurrentFile,
+      name: newFilename,
+      status: 'editing',
+    }))
   }
 
   const changeCurrentContent = (newContent: string) => {
-    setFiles((prevFiles) =>
-      prevFiles.map((prevFile) =>
-        prevFile.id === currentFile.id
-          ? { ...prevFile, content: newContent }
-          : prevFile,
-      ),
-    )
+    setCurrentFile((prevCurrentFile) => ({
+      ...prevCurrentFile,
+      content: newContent,
+      status: 'editing',
+    }))
   }
 
   return (
