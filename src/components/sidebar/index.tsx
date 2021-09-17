@@ -1,42 +1,25 @@
-import { useState, RefObject } from 'react'
-import { v4 as uuidv4 } from 'uuid'
-
 import { File as TypeFile } from 'resources/types/file.type'
 
-import { File } from 'components/aside/file'
+import { File } from 'components/sidebar/file'
 
 import logoImg from 'resources/assets/logo.svg'
 import plusIcon from 'resources/assets/plus-symbol.svg'
 
 import * as S from './styles'
 
-type AsideProps = {
-  inputRef: RefObject<HTMLInputElement>
+type SidebarProps = {
+  files: TypeFile[]
+  handleAddNewFile: () => void
+  changeFileById: (id: string) => void
+  deleteFileById: (id: string) => void
 }
 
-export function Aside ({ inputRef }: AsideProps) {
-  const [files, setFiles] = useState<TypeFile[]>([])
-
-  const handleAddNewFile = () => {
-    const newFile: TypeFile = {
-      id: uuidv4(),
-      name: 'Sem título',
-      content: '',
-      active: true,
-      status: 'saved',
-    }
-
-    inputRef.current?.focus()
-
-    setFiles((prevFiles) => {
-      const prevFilesDisabled = prevFiles.map(
-        (prevFile) => ({ ...prevFile, active: false }),
-      )
-
-      return [...prevFilesDisabled, newFile]
-    })
-  }
-
+export function Sidebar ({
+  files,
+  handleAddNewFile,
+  changeFileById,
+  deleteFileById,
+}: SidebarProps) {
   return (
     <S.Container>
       <S.LogoImg src={logoImg} alt='Markee App' title='Markee App' />
@@ -56,6 +39,8 @@ export function Aside ({ inputRef }: AsideProps) {
             name={file.name}
             active={file.active}
             status={file.status}
+            changeFileById={changeFileById}
+            deleteFileById={deleteFileById}
           />
         ))}
       </S.Files>

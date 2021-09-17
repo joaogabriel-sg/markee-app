@@ -8,7 +8,8 @@ type MarkdownSideProps = {
 }
 
 export function MarkdownSide ({
-  content, handleChangeContent,
+  content,
+  handleChangeContent,
 }: MarkdownSideProps) {
   return (
     <S.Container>
