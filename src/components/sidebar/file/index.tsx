@@ -32,11 +32,14 @@ export function File ({ id, name, active, status, deleteFileById }: FileProps) {
         <S.Name>{name}</S.Name>
       </S.Link>
       {active
-        ? (<S.StatusIcon
+        ? (
+          <S.StatusIcon
             src={currentStatusIcon}
             alt={`Status: ${status}`}
             title={`Status: ${status}`}
-           />)
+            isSaving={status === 'saving'}
+          />
+          )
         : (
           <S.DeleteButton
             type='button'

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro'
+import styled, { css, keyframes } from 'styled-components/macro'
 
 type ContainerProps = {
   isActive: boolean
@@ -66,7 +66,24 @@ export const Name = styled.span`
   text-overflow: ellipsis;
 `
 
-export const StatusIcon = styled.img``
+type StatusIconProps = {
+  isSaving: boolean
+}
+
+const savingAnimation = keyframes`
+  0%, 100% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+`
+
+export const StatusIcon = styled.img<StatusIconProps>`
+  ${({ isSaving }) => isSaving && css`
+    animation: ${savingAnimation} 1.2s ease-in-out infinite;
+  `}
+`
 
 export const DeleteButton = styled.button`
   background: none;
