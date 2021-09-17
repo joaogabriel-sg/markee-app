@@ -15,11 +15,11 @@ type FileProps = Omit<TypeFile, 'content'> & {
 
 export function File ({ id, name, active, status, deleteFileById }: FileProps) {
   const currentFileIcon = active ? fileBlueIcon : fileWhiteIcon
-  const currentStatusIcon = status === 'editing'
-    ? editingIcon
-    : status === 'saving'
-      ? savingIcon
-      : savedIcon
+  const currentStatusIcon = {
+    editing: editingIcon,
+    saving: savingIcon,
+    saved: savedIcon,
+  }[status]
 
   const handleDeleteFile = () => {
     deleteFileById(id)
@@ -32,7 +32,11 @@ export function File ({ id, name, active, status, deleteFileById }: FileProps) {
         <S.Name>{name}</S.Name>
       </S.Link>
       {active
-        ? (<S.StatusIcon src={currentStatusIcon} alt={`Status: ${status}`} />)
+        ? (<S.StatusIcon
+            src={currentStatusIcon}
+            alt={`Status: ${status}`}
+            title={`Status: ${status}`}
+           />)
         : (
           <S.DeleteButton
             type='button'
