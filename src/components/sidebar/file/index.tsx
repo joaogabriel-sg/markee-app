@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react'
+
 import { File as TypeFile } from 'resources/types/file.type'
 
 import deleteIcon from 'resources/assets/delete-icon.svg'
@@ -10,10 +12,18 @@ import savedIcon from 'resources/assets/saved-icon.svg'
 import * as S from './styles'
 
 type FileProps = Omit<TypeFile, 'content'> & {
+  changeFileById: (id: string) => void
   deleteFileById: (id: string) => void
 }
 
-export function File ({ id, name, active, status, deleteFileById }: FileProps) {
+export function File ({
+  id,
+  name,
+  active,
+  status,
+  changeFileById,
+  deleteFileById,
+}: FileProps) {
   const currentFileIcon = active ? fileBlueIcon : fileWhiteIcon
   const currentStatusIcon = {
     editing: editingIcon,
@@ -21,13 +31,18 @@ export function File ({ id, name, active, status, deleteFileById }: FileProps) {
     saved: savedIcon,
   }[status]
 
+  const handleChangeFile = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    changeFileById(id)
+  }
+
   const handleDeleteFile = () => {
     deleteFileById(id)
   }
 
   return (
     <S.Container key={id} isActive={active}>
-      <S.Link href='/' title={`Arquivo ${name}`}>
+      <S.Link href='/' onClick={handleChangeFile} title={`Arquivo ${name}`}>
         <S.FileIcon src={currentFileIcon} alt={`Arquivo ${name}`} />
         <S.Name>{name}</S.Name>
       </S.Link>

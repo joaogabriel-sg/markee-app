@@ -17,7 +17,7 @@ function App () {
     setFiles((prevFiles) => prevFiles.map(
       (prevFile) => prevFile.id === currentFile.id
         ? currentFile
-        : prevFile,
+        : { ...prevFile, active: false },
     ))
 
     if (currentFile.status !== 'saved') {
@@ -76,6 +76,14 @@ function App () {
     }))
   }
 
+  const changeFileById = (id: string) => {
+    const newCurrentFile = files.find((file) => file.id === id)
+    if (!newCurrentFile) return
+
+    inputRef.current?.focus()
+    setCurrentFile({ ...newCurrentFile, active: true })
+  }
+
   const deleteFileById = (id: string) => {
     setFiles((prevFiles) => prevFiles.filter(
       (prevFile) => prevFile.id !== id,
@@ -87,6 +95,7 @@ function App () {
       <Sidebar
         files={files}
         handleAddNewFile={handleAddNewFile}
+        changeFileById={changeFileById}
         deleteFileById={deleteFileById}
       />
       <ContentArea
