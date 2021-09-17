@@ -62,6 +62,7 @@ export const FileIcon = styled.img`
 
 export const Name = styled.span`
   overflow: hidden;
+  white-space: nowrap;
   text-overflow: ellipsis;
 `
 
