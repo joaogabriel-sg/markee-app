@@ -1,4 +1,4 @@
-import { ChangeEvent, RefObject, useState } from 'react'
+import { ChangeEvent, RefObject } from 'react'
 
 import { File } from 'resources/types/file.type'
 
@@ -12,15 +12,17 @@ type ContentAreaProps = {
   inputRef: RefObject<HTMLInputElement>
   currentFile: File
   changeCurrentFilename: (newFilename: string) => void
+  changeCurrentContent: (newContent: string) => void
 }
 
 export function ContentArea ({
-  inputRef, currentFile, changeCurrentFilename,
+  inputRef,
+  currentFile,
+  changeCurrentFilename,
+  changeCurrentContent,
 }: ContentAreaProps) {
-  const [content, setContent] = useState('')
-
   const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value)
+    changeCurrentContent(e.target.value)
   }
 
   return (
@@ -35,10 +37,10 @@ export function ContentArea ({
 
           <S.Content>
             <MarkdownSide
-              content={content}
+              content={currentFile.content}
               handleChangeContent={handleChangeContent}
             />
-            <ResultSide content={content} />
+            <ResultSide content={currentFile.content} />
           </S.Content>
         </>
       )}

@@ -19,7 +19,6 @@ function App () {
         files.find((file) => file.active === true) ?? files[files.length - 1]
 
       setCurrentFile(activeFile)
-      inputRef.current?.focus()
     }
   }, [files])
 
@@ -40,6 +39,8 @@ function App () {
         },
       ]
     })
+
+    inputRef.current?.focus()
   }
 
   const changeCurrentFilename = (newFilename: string) => {
@@ -52,6 +53,16 @@ function App () {
     )
   }
 
+  const changeCurrentContent = (newContent: string) => {
+    setFiles((prevFiles) =>
+      prevFiles.map((prevFile) =>
+        prevFile.id === currentFile.id
+          ? { ...prevFile, content: newContent }
+          : prevFile,
+      ),
+    )
+  }
+
   return (
     <S.Container>
       <Sidebar files={files} handleAddNewFile={handleAddNewFile} />
@@ -59,6 +70,7 @@ function App () {
         inputRef={inputRef}
         currentFile={currentFile}
         changeCurrentFilename={changeCurrentFilename}
+        changeCurrentContent={changeCurrentContent}
       />
     </S.Container>
   )
