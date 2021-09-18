@@ -1,12 +1,26 @@
 import { ChangeEvent, RefObject } from 'react'
+import marked from 'marked'
 
 import { File } from 'resources/types/file.type'
 
 import { Filename } from 'components/content-area/filename'
-import { MarkdownSide } from './markdown-side'
-import { ResultSide } from './result-side'
 
+import 'highlight.js/styles/github.css'
 import * as S from './styles'
+
+import('highlight.js').then((hljs) => {
+  const h = hljs.default
+
+  marked.setOptions({
+    highlight: (code, language) => {
+      if (language && h.getLanguage(language)) {
+        return h.highlight(code, { language }).value
+      }
+
+      return h.highlightAuto(code).value
+    },
+  })
+})
 
 type ContentAreaProps = {
   inputRef: RefObject<HTMLInputElement>
@@ -36,11 +50,15 @@ export function ContentArea ({
           />
 
           <S.Content>
-            <MarkdownSide
-              content={currentFile.content}
-              handleChangeContent={handleChangeContent}
+            <S.MarkdownTextarea
+              placeholder='Digite aqui seu markdown'
+              value={currentFile.content}
+              onChange={handleChangeContent}
             />
-            <ResultSide content={currentFile.content} />
+
+            <S.Result
+              dangerouslySetInnerHTML={{ __html: marked(currentFile.content) }}
+            />
           </S.Content>
         </>
       )}
