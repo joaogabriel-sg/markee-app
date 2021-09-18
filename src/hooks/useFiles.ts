@@ -60,6 +60,14 @@ export function useFiles () {
     return () => clearTimeout(timeoutId)
   }, [files])
 
+  useEffect(() => {
+    const activeFile = files.find((file) => file.active)
+
+    if (activeFile) {
+      window.history.replaceState(null, '', `/file/${activeFile.id}`)
+    }
+  }, [files])
+
   const handleAddNewFile = () => {
     inputRef.current?.focus()
 
@@ -102,6 +110,7 @@ export function useFiles () {
     if (!newActiveFile) return
 
     inputRef.current?.focus()
+    window.history.replaceState(null, '', `/file/${id}`)
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.id === id
         ? { ...newActiveFile, active: true }
