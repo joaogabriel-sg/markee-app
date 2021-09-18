@@ -1,49 +1,67 @@
 import { ChangeEvent, RefObject } from 'react'
+import marked from 'marked'
 
 import { File } from 'resources/types/file.type'
 
 import { Filename } from 'components/content-area/filename'
-import { MarkdownSide } from './markdown-side'
-import { ResultSide } from './result-side'
 
+import 'highlight.js/styles/github.css'
 import * as S from './styles'
+
+import('highlight.js').then((hljs) => {
+  const h = hljs.default
+
+  marked.setOptions({
+    highlight: (code, language) => {
+      if (language && h.getLanguage(language)) {
+        return h.highlight(code, { language }).value
+      }
+
+      return h.highlightAuto(code).value
+    },
+  })
+})
 
 type ContentAreaProps = {
   inputRef: RefObject<HTMLInputElement>
-  currentFile: File
-  changeCurrentFilename: (newFilename: string) => void
-  changeCurrentContent: (newContent: string) => void
+  file?: File
+  updateActiveFileName: (newFileName: string) => void
+  updateActiveFileContent: (newFileContent: string) => void
 }
 
 export function ContentArea ({
   inputRef,
-  currentFile,
-  changeCurrentFilename,
-  changeCurrentContent,
+  file,
+  updateActiveFileName,
+  updateActiveFileContent,
 }: ContentAreaProps) {
-  const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    changeCurrentContent(e.target.value)
+  const handleChangeFileContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    updateActiveFileContent(e.target.value)
   }
+
+  if (!file) return null
 
   return (
     <S.Container>
-      {!!currentFile.id && (
-        <>
-          <Filename
-            inputRef={inputRef}
-            name={currentFile.name}
-            changeCurrentFilename={changeCurrentFilename}
+      <>
+        <Filename
+          inputRef={inputRef}
+          name={file.name}
+          updateActiveFileName={updateActiveFileName}
+        />
+
+        <S.Content>
+          <S.MarkdownTextarea
+            placeholder='Digite aqui seu markdown'
+            value={file.content}
+            onChange={handleChangeFileContent}
           />
 
-          <S.Content>
-            <MarkdownSide
-              content={currentFile.content}
-              handleChangeContent={handleChangeContent}
-            />
-            <ResultSide content={currentFile.content} />
-          </S.Content>
-        </>
-      )}
+          <S.Result
+            dangerouslySetInnerHTML={{ __html: marked(file.content) }}
+          />
+        </S.Content>
+      </>
     </S.Container>
   )
 }

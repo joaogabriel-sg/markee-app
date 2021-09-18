@@ -8,12 +8,11 @@ import * as S from './styles/app-styles'
 function App () {
   const {
     files,
-    currentFile,
     inputRef,
     handleAddNewFile,
-    changeCurrentFilename,
-    changeCurrentContent,
-    changeFileById,
+    updateActiveFileName,
+    updateActiveFileContent,
+    updateActiveFileById,
     deleteFileById,
   } = useFiles()
 
@@ -22,14 +21,14 @@ function App () {
       <Sidebar
         files={files}
         handleAddNewFile={handleAddNewFile}
-        changeFileById={changeFileById}
+        updateActiveFileById={updateActiveFileById}
         deleteFileById={deleteFileById}
       />
       <ContentArea
         inputRef={inputRef}
-        currentFile={currentFile}
-        changeCurrentFilename={changeCurrentFilename}
-        changeCurrentContent={changeCurrentContent}
+        file={files.find((file) => file.active)}
+        updateActiveFileName={updateActiveFileName}
+        updateActiveFileContent={updateActiveFileContent}
       />
     </S.Container>
   )

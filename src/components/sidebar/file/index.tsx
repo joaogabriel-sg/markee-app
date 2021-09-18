@@ -12,7 +12,7 @@ import savedIcon from 'resources/assets/saved-icon.svg'
 import * as S from './styles'
 
 type FileProps = Omit<TypeFile, 'content'> & {
-  changeFileById: (id: string) => void
+  updateActiveFileById: (id: string) => void
   deleteFileById: (id: string) => void
 }
 
@@ -21,7 +21,7 @@ export function File ({
   name,
   active,
   status,
-  changeFileById,
+  updateActiveFileById,
   deleteFileById,
 }: FileProps) {
   const currentFileIcon = active ? fileBlueIcon : fileWhiteIcon
@@ -33,7 +33,7 @@ export function File ({
 
   const handleChangeFile = (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
-    changeFileById(id)
+    updateActiveFileById(id)
   }
 
   const handleDeleteFile = () => {
@@ -46,24 +46,25 @@ export function File ({
         <S.FileIcon src={currentFileIcon} alt={`Arquivo ${name}`} />
         <S.Name>{name}</S.Name>
       </S.Link>
-      {active
-        ? (
-          <S.StatusIcon
-            src={currentStatusIcon}
-            alt={`Status: ${status}`}
-            title={`Status: ${status}`}
-            isSaving={status === 'saving'}
-          />
-          )
-        : (
-          <S.DeleteButton
-            type='button'
-            onClick={handleDeleteFile}
-            title={`Remover o arquivo ${name}`}
-          >
-            <S.DeleteIcon src={deleteIcon} alt={`Deletar arquivo ${name}`} />
-          </S.DeleteButton>
-          )}
+
+      {active && (
+        <S.StatusIcon
+          src={currentStatusIcon}
+          alt={`Status: ${status}`}
+          title={`Status: ${status}`}
+          isSaving={status === 'saving'}
+        />
+      )}
+
+      {!active && (
+        <S.DeleteButton
+          type='button'
+          onClick={handleDeleteFile}
+          title={`Remover o arquivo ${name}`}
+        >
+          <S.DeleteIcon src={deleteIcon} alt={`Deletar arquivo ${name}`} />
+        </S.DeleteButton>
+      )}
     </S.Container>
   )
 }
