@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
+import localforage from 'localforage'
 
 import { File } from 'resources/types/file.type'
 
@@ -8,12 +9,31 @@ export function useFiles () {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
+    async function getFilesInLocalForage () {
+      const localFiles = await localforage.getItem<File[]>('@MarkeeApp:files')
+
+      if (localFiles) {
+        setFiles(localFiles)
+        return
+      }
+
+      handleAddNewFile()
+    }
+
+    getFilesInLocalForage()
+  }, [])
+
+  useEffect(() => {
+    localforage.setItem('@MarkeeApp:files', files)
+  }, [files])
+
+  useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>
 
     function updateFileStatus () {
       const activeFile = files.find((file) => file.active)
 
-      if (!!files.length && !!activeFile && activeFile.status !== 'editing') {
+      if (!files.length || !activeFile || activeFile.status !== 'editing') {
         return
       }
 
