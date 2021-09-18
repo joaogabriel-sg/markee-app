@@ -10,9 +10,9 @@ function App () {
     files,
     inputRef,
     handleAddNewFile,
-    changeCurrentFilename,
-    changeCurrentContent,
-    changeFileById,
+    updateActiveFileName,
+    updateActiveFileContent,
+    updateActiveFileById,
     deleteFileById,
   } = useFiles()
 
@@ -21,14 +21,14 @@ function App () {
       <Sidebar
         files={files}
         handleAddNewFile={handleAddNewFile}
-        changeFileById={changeFileById}
+        updateActiveFileById={updateActiveFileById}
         deleteFileById={deleteFileById}
       />
       <ContentArea
         inputRef={inputRef}
-        currentFile={files.find((file) => file.active)}
-        changeCurrentFilename={changeCurrentFilename}
-        changeCurrentContent={changeCurrentContent}
+        file={files.find((file) => file.active)}
+        updateActiveFileName={updateActiveFileName}
+        updateActiveFileContent={updateActiveFileContent}
       />
     </S.Container>
   )

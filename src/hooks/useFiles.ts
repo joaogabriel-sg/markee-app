@@ -55,23 +55,23 @@ export function useFiles () {
     })
   }
 
-  const changeCurrentFilename = (newFilename: string) => {
+  const updateActiveFileName = (newFileName: string) => {
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.active
-        ? { ...prevFile, name: newFilename, status: 'editing' }
+        ? { ...prevFile, name: newFileName, status: 'editing' }
         : prevFile,
     ))
   }
 
-  const changeCurrentContent = (newContent: string) => {
+  const updateActiveFileContent = (newFileContent: string) => {
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.active
-        ? { ...prevFile, content: newContent, status: 'editing' }
+        ? { ...prevFile, content: newFileContent, status: 'editing' }
         : prevFile,
     ))
   }
 
-  const changeFileById = (id: string) => {
+  const updateActiveFileById = (id: string) => {
     const newActiveFile = files.find((file) => file.id === id)
     if (!newActiveFile) return
 
@@ -93,9 +93,9 @@ export function useFiles () {
     files,
     inputRef,
     handleAddNewFile,
-    changeCurrentFilename,
-    changeCurrentContent,
-    changeFileById,
+    updateActiveFileName,
+    updateActiveFileContent,
+    updateActiveFileById,
     deleteFileById,
   }
 }

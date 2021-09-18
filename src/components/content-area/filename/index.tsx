@@ -7,19 +7,21 @@ import * as S from './styles'
 type FilenameProps = {
   inputRef: RefObject<HTMLInputElement>
   name: string
-  changeCurrentFilename: (newFilename: string) => void
+  updateActiveFileName: (newFileName: string) => void
 }
 
 export function Filename ({
-  inputRef, name, changeCurrentFilename,
+  inputRef,
+  name,
+  updateActiveFileName,
 }: FilenameProps) {
-  const handleChangeFilename = (e: ChangeEvent<HTMLInputElement>) => {
-    changeCurrentFilename(e.target.value)
+  const handleChangeFileName = (e: ChangeEvent<HTMLInputElement>) => {
+    updateActiveFileName(e.target.value)
   }
 
   const handleBlurInput = (e: FocusEvent<HTMLInputElement>) => {
     if (e.target.value.trim() === '') {
-      changeCurrentFilename('Sem título')
+      updateActiveFileName('Sem título')
     }
   }
 
@@ -32,7 +34,7 @@ export function Filename ({
         type='text'
         id='filename'
         value={name}
-        onChange={handleChangeFilename}
+        onChange={handleChangeFileName}
         onBlur={handleBlurInput}
         ref={inputRef}
         autoFocus

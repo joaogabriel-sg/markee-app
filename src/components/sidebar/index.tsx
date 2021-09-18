@@ -10,14 +10,14 @@ import * as S from './styles'
 type SidebarProps = {
   files: TypeFile[]
   handleAddNewFile: () => void
-  changeFileById: (id: string) => void
+  updateActiveFileById: (id: string) => void
   deleteFileById: (id: string) => void
 }
 
 export function Sidebar ({
   files,
   handleAddNewFile,
-  changeFileById,
+  updateActiveFileById,
   deleteFileById,
 }: SidebarProps) {
   return (
@@ -39,7 +39,7 @@ export function Sidebar ({
             name={file.name}
             active={file.active}
             status={file.status}
-            changeFileById={changeFileById}
+            updateActiveFileById={updateActiveFileById}
             deleteFileById={deleteFileById}
           />
         ))}

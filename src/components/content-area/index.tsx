@@ -24,44 +24,44 @@ import('highlight.js').then((hljs) => {
 
 type ContentAreaProps = {
   inputRef: RefObject<HTMLInputElement>
-  currentFile: File | undefined
-  changeCurrentFilename: (newFilename: string) => void
-  changeCurrentContent: (newContent: string) => void
+  file?: File
+  updateActiveFileName: (newFileName: string) => void
+  updateActiveFileContent: (newFileContent: string) => void
 }
 
 export function ContentArea ({
   inputRef,
-  currentFile,
-  changeCurrentFilename,
-  changeCurrentContent,
+  file,
+  updateActiveFileName,
+  updateActiveFileContent,
 }: ContentAreaProps) {
-  const handleChangeContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    changeCurrentContent(e.target.value)
+  const handleChangeFileContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    updateActiveFileContent(e.target.value)
   }
+
+  if (!file) return null
 
   return (
     <S.Container>
-      {!!currentFile?.id && (
-        <>
-          <Filename
-            inputRef={inputRef}
-            name={currentFile.name}
-            changeCurrentFilename={changeCurrentFilename}
+      <>
+        <Filename
+          inputRef={inputRef}
+          name={file.name}
+          updateActiveFileName={updateActiveFileName}
+        />
+
+        <S.Content>
+          <S.MarkdownTextarea
+            placeholder='Digite aqui seu markdown'
+            value={file.content}
+            onChange={handleChangeFileContent}
           />
 
-          <S.Content>
-            <S.MarkdownTextarea
-              placeholder='Digite aqui seu markdown'
-              value={currentFile.content}
-              onChange={handleChangeContent}
-            />
-
-            <S.Result
-              dangerouslySetInnerHTML={{ __html: marked(currentFile.content) }}
-            />
-          </S.Content>
-        </>
-      )}
+          <S.Result
+            dangerouslySetInnerHTML={{ __html: marked(file.content) }}
+          />
+        </S.Content>
+      </>
     </S.Container>
   )
 }
