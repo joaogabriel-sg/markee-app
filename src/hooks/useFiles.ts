@@ -8,30 +8,36 @@ export function useFiles () {
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
-    const activeFile = files.find((file) => file.active)
+    let timeoutId: ReturnType<typeof setTimeout>
 
-    if (!!files.length && !!activeFile && activeFile.status !== 'editing') {
-      return
-    }
+    function updateFileStatus () {
+      const activeFile = files.find((file) => file.active)
 
-    const idTimeoutSavingStatus = setTimeout(() => {
-      setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-        prevFile.active
-          ? { ...prevFile, status: 'saving' }
-          : prevFile,
-      ))
+      if (!!files.length && !!activeFile && activeFile.status !== 'editing') {
+        return
+      }
 
-      const idTimeoutSavedStatus = setTimeout(() => {
+      timeoutId = setTimeout(() => {
         setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
           prevFile.active
-            ? { ...prevFile, status: 'saved' }
+            ? { ...prevFile, status: 'saving' }
             : prevFile,
         ))
-        clearTimeout(idTimeoutSavedStatus)
-      }, 300)
-    }, 300)
 
-    return () => clearTimeout(idTimeoutSavingStatus)
+        const idTimeoutSavedStatus = setTimeout(() => {
+          setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
+            prevFile.active
+              ? { ...prevFile, status: 'saved' }
+              : prevFile,
+          ))
+          clearTimeout(idTimeoutSavedStatus)
+        }, 300)
+      }, 300)
+    }
+
+    updateFileStatus()
+
+    return () => clearTimeout(timeoutId)
   }, [files])
 
   const handleAddNewFile = () => {
