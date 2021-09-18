@@ -42,7 +42,7 @@ export function File ({
 
   return (
     <S.Container key={id} isActive={active}>
-      <S.Link href='/' onClick={handleChangeFile} title={`Arquivo ${name}`}>
+      <S.Link href={`/file/${id}`} onClick={handleChangeFile} title={`Arquivo ${name}`}>
         <S.FileIcon src={currentFileIcon} alt={`Arquivo ${name}`} />
         <S.Name>{name}</S.Name>
       </S.Link>
