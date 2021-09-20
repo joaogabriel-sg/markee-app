@@ -1,7 +1,5 @@
 import { ChangeEvent, FocusEvent, RefObject } from 'react'
 
-import fileBlueIcon from 'resources/assets/file-blue-icon.svg'
-
 import * as S from './styles'
 
 type FilenameProps = {
@@ -28,7 +26,7 @@ export function Filename ({
   return (
     <S.Container>
       <S.Wrapper htmlFor='filename'>
-        <S.FileIcon src={fileBlueIcon} alt='Nomear arquivo' />
+        <S.FileIcon />
       </S.Wrapper>
       <S.InputField
         type='text'

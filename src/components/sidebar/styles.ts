@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
+import {
+  LogoImg,
+  PlusIcon as AssetsPlusIcon,
+} from 'resources/assets'
+
 export const Container = styled.aside`${({ theme }) => css`
   background: ${theme.colors.black};
   padding: 2.4rem 0.8rem;
@@ -15,7 +20,7 @@ export const Container = styled.aside`${({ theme }) => css`
   }
 `}`
 
-export const LogoImg = styled.img`
+export const Logo = styled(LogoImg)`
   max-width: 100%;
   margin-bottom: 2.4rem;
 `
@@ -79,7 +84,7 @@ export const AddFileButton = styled.button`${({ theme }) => css`
   }
 `}`
 
-export const PlusIcon = styled.img`
+export const PlusIcon = styled(AssetsPlusIcon)`
   flex-shrink: 0;
   margin-right: 1.2rem;
 `
