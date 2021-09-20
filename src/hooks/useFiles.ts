@@ -12,7 +12,7 @@ export function useFiles () {
     async function getFilesInLocalForage () {
       const localFiles = await localforage.getItem<File[]>('@MarkeeApp:files')
 
-      if (localFiles) {
+      if (localFiles !== null && localFiles.length > 0) {
         setFiles(localFiles)
         return
       }
