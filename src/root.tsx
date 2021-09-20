@@ -3,8 +3,7 @@ import { ThemeProvider } from 'styled-components'
 import { App } from './app'
 
 import 'normalize.css'
-import { GlobalStyle } from './styles/global-style'
-import { theme } from './styles/theme'
+import { theme, GlobalStyle } from 'styles'
 
 export function Root () {
   return (

@@ -1,5 +1,5 @@
 import * as S from './styles'
 
-export function Editing () {
+export function StatusEditing () {
   return <S.EditingIcon />
 }

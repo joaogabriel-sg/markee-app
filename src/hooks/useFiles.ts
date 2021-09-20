@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import localforage from 'localforage'
 
-import { File } from 'resources/types/file.type'
+import { File } from 'resources/types'
 
 const markeeAppLocalForageKey = '@MarkeeApp:files'
 

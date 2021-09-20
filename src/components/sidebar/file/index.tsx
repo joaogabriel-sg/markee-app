@@ -1,6 +1,6 @@
 import { MouseEvent } from 'react'
 
-import { File as TypeFile } from 'resources/types/file.type'
+import { File as TypeFile } from 'resources/types'
 
 import {
   FileBlueIcon,
@@ -8,7 +8,7 @@ import {
   DeleteIcon,
 } from 'resources/assets'
 
-import { Editing, Saving, Saved } from 'components/status'
+import { StatusEditing, StatusSaving, StatusSaved } from 'components'
 
 import * as S from './styles'
 
@@ -26,9 +26,9 @@ export function File ({
   deleteFileById,
 }: FileProps) {
   const StatusIcon = {
-    editing: Editing,
-    saving: Saving,
-    saved: Saved,
+    editing: StatusEditing,
+    saving: StatusSaving,
+    saved: StatusSaved,
   }[status]
 
   const handleChangeFile = (e: MouseEvent<HTMLAnchorElement>) => {

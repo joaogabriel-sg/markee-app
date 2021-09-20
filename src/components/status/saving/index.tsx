@@ -1,5 +1,5 @@
 import * as S from './styles'
 
-export function Saving () {
+export function StatusSaving () {
   return <S.SavingIcon />
 }

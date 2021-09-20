@@ -1,6 +1,6 @@
-import { File as TypeFile } from 'resources/types/file.type'
+import { File as TypeFile } from 'resources/types'
 
-import { File } from 'components/sidebar/file'
+import { File } from './file'
 
 import * as S from './styles'
 

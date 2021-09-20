@@ -1,9 +1,9 @@
 import { ChangeEvent, RefObject } from 'react'
 import marked from 'marked'
 
-import { File } from 'resources/types/file.type'
+import { File } from 'resources/types'
 
-import { Filename } from 'components/content-area/filename'
+import { Filename } from './filename'
 
 import 'highlight.js/styles/github.css'
 import * as S from './styles'
