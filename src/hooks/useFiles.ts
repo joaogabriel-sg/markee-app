@@ -4,13 +4,15 @@ import localforage from 'localforage'
 
 import { File } from 'resources/types/file.type'
 
+const markeeAppLocalForageKey = '@MarkeeApp:files'
+
 export function useFiles () {
   const [files, setFiles] = useState<File[]>([])
   const inputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     async function getFilesInLocalForage () {
-      const localFiles = await localforage.getItem<File[]>('@MarkeeApp:files')
+      const localFiles = await localforage.getItem<File[]>(markeeAppLocalForageKey)
 
       if (localFiles !== null && localFiles.length > 0) {
         setFiles(localFiles)
@@ -24,7 +26,7 @@ export function useFiles () {
   }, [])
 
   useEffect(() => {
-    localforage.setItem('@MarkeeApp:files', files)
+    localforage.setItem(markeeAppLocalForageKey, files)
   }, [files])
 
   useEffect(() => {
@@ -38,18 +40,10 @@ export function useFiles () {
       }
 
       timeoutId = setTimeout(() => {
-        setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-          prevFile.active
-            ? { ...prevFile, status: 'saving' }
-            : prevFile,
-        ))
+        updateActiveFile({ status: 'saving' })
 
         const idTimeoutSavedStatus = setTimeout(() => {
-          setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-            prevFile.active
-              ? { ...prevFile, status: 'saved' }
-              : prevFile,
-          ))
+          updateActiveFile({ status: 'saved' })
           clearTimeout(idTimeoutSavedStatus)
         }, 300)
       }, 300)
@@ -92,17 +86,17 @@ export function useFiles () {
   const updateActiveFile = (updatedPropertiesInActiveFile: Partial<File>) => {
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.active
-        ? { ...prevFile, ...updatedPropertiesInActiveFile, status: 'editing' }
+        ? { ...prevFile, ...updatedPropertiesInActiveFile }
         : prevFile,
     ))
   }
 
   const updateActiveFileName = (newFileName: string) => {
-    updateActiveFile({ name: newFileName })
+    updateActiveFile({ name: newFileName, status: 'editing' })
   }
 
   const updateActiveFileContent = (newFileContent: string) => {
-    updateActiveFile({ content: newFileContent })
+    updateActiveFile({ content: newFileContent, status: 'editing' })
   }
 
   const updateActiveFileById = (id: string) => {
