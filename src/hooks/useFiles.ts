@@ -110,7 +110,6 @@ export function useFiles () {
     if (!newActiveFile) return
 
     inputRef.current?.focus()
-    window.history.replaceState(null, '', `/file/${id}`)
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.id === id
         ? { ...newActiveFile, active: true }
