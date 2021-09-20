@@ -89,20 +89,20 @@ export function useFiles () {
     })
   }
 
-  const updateActiveFileName = (newFileName: string) => {
+  const updateActiveFile = (updatedPropertiesInActiveFile: Partial<File>) => {
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.active
-        ? { ...prevFile, name: newFileName, status: 'editing' }
+        ? { ...prevFile, ...updatedPropertiesInActiveFile, status: 'editing' }
         : prevFile,
     ))
   }
 
+  const updateActiveFileName = (newFileName: string) => {
+    updateActiveFile({ name: newFileName })
+  }
+
   const updateActiveFileContent = (newFileContent: string) => {
-    setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-      prevFile.active
-        ? { ...prevFile, content: newFileContent, status: 'editing' }
-        : prevFile,
-    ))
+    updateActiveFile({ content: newFileContent })
   }
 
   const updateActiveFileById = (id: string) => {
