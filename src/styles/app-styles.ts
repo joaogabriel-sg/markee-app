@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components/macro'
 
 export const Container = styled.div`${({ theme }) => css`
-  background: ${theme.colors.white};
+  background: ${theme.colors.background};
   min-height: 100vh;
 
   display: flex;

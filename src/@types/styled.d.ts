@@ -6,6 +6,7 @@ declare module 'styled-components' {
       gray: string
       white: string
       primary: string
+      background: string
     }
     mediaQuery: {
       mq920: string

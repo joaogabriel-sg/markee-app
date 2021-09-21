@@ -7,6 +7,7 @@ export const theme: DefaultTheme = {
     gray: '#E4E5E7',
     white: '#FAFAFA',
     primary: '#1FC8E1',
+    background: '#F9FBFF',
   },
   mediaQuery: {
     mq920: '920px',
