@@ -15,12 +15,14 @@ export const Container = styled.aside`${({ theme }) => css`
   align-items: center;
 
   @media(min-width: ${theme.mediaQuery.mq920}) {
+    flex-shrink: 0;
     width: 36rem;
     padding: 4.8rem 3.2rem;
   }
 `}`
 
 export const Logo = styled(LogoImg)`
+  flex-shrink: 0;
   max-width: 100%;
   margin-bottom: 2.4rem;
 `
@@ -76,11 +78,14 @@ export const AddFileButton = styled.button`${({ theme }) => css`
   font-size: 1.4rem;
   color: ${theme.colors.lightBlack};
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 
   &:hover {
-    transform: scale(1.02, 1.02);
     opacity: 0.75;
+  }
+
+  @media (min-width: ${theme.mediaQuery.mq920}) {
+    max-width: 100%;
   }
 `}`
 
@@ -114,6 +119,15 @@ export const Files = styled.ul`${({ theme }) => css`
     width: 100%;
     flex-direction: column;
     overflow-x: initial;
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+      width: 3.2px;
+      height: auto;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: ${theme.colors.lightBlack};
+    }
   }
-`}
-`
+`}`

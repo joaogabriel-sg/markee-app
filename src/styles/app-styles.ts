@@ -9,5 +9,7 @@ export const Container = styled.div`${({ theme }) => css`
 
   @media(min-width: ${theme.mediaQuery.mq920}) {
     flex-direction: row;
+    height: 100vh;
+    overflow-y: hidden;
   }
 `}`
