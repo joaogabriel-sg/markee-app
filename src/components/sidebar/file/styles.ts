@@ -44,8 +44,9 @@ export const Container = styled.li<ContainerProps>`
   `}
 `
 
-export const Link = styled.a`
+export const Link = styled.a`${({ theme }) => css`
   width: 100%;
+  max-width: 16rem;
   margin-right: 1.2rem;
 
   overflow: hidden;
@@ -55,8 +56,16 @@ export const Link = styled.a`
 
   font-size: 1.6rem;
   text-decoration: none;
-  color: ${({ theme }) => theme.colors.white};
-`
+  color: ${theme.colors.white};
+
+  > svg {
+    flex-shrink: 0;
+  }
+
+  @media (min-width: ${theme.mediaQuery.mq920}) {
+    max-width: 100%;
+  }
+`}`
 
 export const Name = styled.span`
   overflow: hidden;

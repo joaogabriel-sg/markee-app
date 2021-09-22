@@ -25,14 +25,16 @@ export const Content = styled.div`
 `
 
 export const MarkdownTextarea = styled.textarea`${({ theme }) => css`
-  background: ${theme.colors.white};
+  background: ${theme.colors.background};
   width: 100%;
   min-height: 32rem;
   resize: none;
 
   border: none;
+  border-bottom: 2px solid ${theme.colors.gray};
   outline: none;
   padding-right: 0.8rem;
+  padding-bottom: 0.8rem;
   margin-bottom: 4rem;
 
   font-family: 'Inconsolata', 'Courier New', Courier, monospace;
@@ -62,7 +64,9 @@ export const MarkdownTextarea = styled.textarea`${({ theme }) => css`
     height: 100%;
 
     padding-right: 3.2rem;
+    padding-bottom: 0;
     border-right: 1px solid ${theme.colors.gray};
+    border-bottom: none;
     margin-bottom: 0;
     overflow-y: scroll;
 

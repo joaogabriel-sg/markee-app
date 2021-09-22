@@ -25,7 +25,7 @@ export function Sidebar ({
 
       <S.AddFileButton type='button' onClick={handleAddNewFile}>
         <S.PlusIcon />
-        Adicionar arquivo
+        <S.ButtonText>Adicionar arquivo</S.ButtonText>
       </S.AddFileButton>
 
       <S.Files>
