@@ -16,6 +16,10 @@ export const GlobalStyle = createGlobalStyle`
   body,
   [data-js="app"] {
     min-height: 100vh;
+
+    @media (min-width: ${({ theme }) => theme.mediaQuery.mq920}) {
+      height: 100vh;
+    }
   }
 
   *,

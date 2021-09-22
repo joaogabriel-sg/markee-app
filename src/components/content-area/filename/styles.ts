@@ -1,5 +1,7 @@
 import styled from 'styled-components/macro'
 
+import { FileBlueIcon } from 'resources/assets'
+
 export const Container = styled.header`
   margin-bottom: 4rem;
   display: flex;
@@ -8,7 +10,7 @@ export const Container = styled.header`
 
 export const Wrapper = styled.label``
 
-export const FileIcon = styled.img`
+export const FileIcon = styled(FileBlueIcon)`
   margin-right: 1.6rem;
 `
 

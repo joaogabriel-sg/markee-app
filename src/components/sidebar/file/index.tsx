@@ -1,13 +1,14 @@
 import { MouseEvent } from 'react'
 
-import { File as TypeFile } from 'resources/types/file.type'
+import { File as TypeFile } from 'resources/types'
 
-import deleteIcon from 'resources/assets/delete-icon.svg'
-import fileWhiteIcon from 'resources/assets/file-white-icon.svg'
-import fileBlueIcon from 'resources/assets/file-blue-icon.svg'
-import editingIcon from 'resources/assets/editing-icon.svg'
-import savingIcon from 'resources/assets/saving-icon.svg'
-import savedIcon from 'resources/assets/saved-icon.svg'
+import {
+  FileBlueIcon,
+  FileWhiteIcon,
+  DeleteIcon,
+} from 'resources/assets'
+
+import { StatusEditing, StatusSaving, StatusSaved } from 'components'
 
 import * as S from './styles'
 
@@ -24,11 +25,10 @@ export function File ({
   updateActiveFileById,
   deleteFileById,
 }: FileProps) {
-  const currentFileIcon = active ? fileBlueIcon : fileWhiteIcon
-  const currentStatusIcon = {
-    editing: editingIcon,
-    saving: savingIcon,
-    saved: savedIcon,
+  const StatusIcon = {
+    editing: StatusEditing,
+    saving: StatusSaving,
+    saved: StatusSaved,
   }[status]
 
   const handleChangeFile = (e: MouseEvent<HTMLAnchorElement>) => {
@@ -43,18 +43,11 @@ export function File ({
   return (
     <S.Container key={id} isActive={active}>
       <S.Link href={`/file/${id}`} onClick={handleChangeFile} title={`Arquivo ${name}`}>
-        <S.FileIcon src={currentFileIcon} alt={`Arquivo ${name}`} />
+        {active ? <FileBlueIcon /> : <FileWhiteIcon />}
         <S.Name>{name}</S.Name>
       </S.Link>
 
-      {active && (
-        <S.StatusIcon
-          src={currentStatusIcon}
-          alt={`Status: ${status}`}
-          title={`Status: ${status}`}
-          isSaving={status === 'saving'}
-        />
-      )}
+      {active && <StatusIcon />}
 
       {!active && (
         <S.DeleteButton
@@ -62,7 +55,7 @@ export function File ({
           onClick={handleDeleteFile}
           title={`Remover o arquivo ${name}`}
         >
-          <S.DeleteIcon src={deleteIcon} alt={`Deletar arquivo ${name}`} />
+          <DeleteIcon />
         </S.DeleteButton>
       )}
     </S.Container>

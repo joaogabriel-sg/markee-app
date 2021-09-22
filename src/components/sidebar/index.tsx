@@ -1,9 +1,6 @@
-import { File as TypeFile } from 'resources/types/file.type'
+import { File as TypeFile } from 'resources/types'
 
-import { File } from 'components/sidebar/file'
-
-import logoImg from 'resources/assets/logo.svg'
-import plusIcon from 'resources/assets/plus-symbol.svg'
+import { File } from './file'
 
 import * as S from './styles'
 
@@ -22,13 +19,13 @@ export function Sidebar ({
 }: SidebarProps) {
   return (
     <S.Container>
-      <S.LogoImg src={logoImg} alt='Markee App' title='Markee App' />
+      <S.Logo />
 
       <S.Title>Arquivos</S.Title>
 
       <S.AddFileButton type='button' onClick={handleAddNewFile}>
-        <S.PlusIcon src={plusIcon} alt='Adicionar arquivo' />
-        Adicionar arquivo
+        <S.PlusIcon />
+        <S.ButtonText>Adicionar arquivo</S.ButtonText>
       </S.AddFileButton>
 
       <S.Files>

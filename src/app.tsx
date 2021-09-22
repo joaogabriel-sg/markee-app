@@ -1,9 +1,8 @@
-import { useFiles } from 'hooks/useFiles'
+import { useFiles } from 'hooks'
 
-import { Sidebar } from './components/sidebar'
-import { ContentArea } from 'components/content-area'
+import { Sidebar, ContentArea } from 'components'
 
-import * as S from './styles/app-styles'
+import { AppStyles as S } from 'styles'
 
 function App () {
   const {

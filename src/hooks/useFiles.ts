@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import localforage from 'localforage'
 
-import { File } from 'resources/types/file.type'
+import { File } from 'resources/types'
+
+const markeeAppLocalForageKey = '@MarkeeApp:files'
 
 export function useFiles () {
   const [files, setFiles] = useState<File[]>([])
@@ -10,9 +12,9 @@ export function useFiles () {
 
   useEffect(() => {
     async function getFilesInLocalForage () {
-      const localFiles = await localforage.getItem<File[]>('@MarkeeApp:files')
+      const localFiles = await localforage.getItem<File[]>(markeeAppLocalForageKey)
 
-      if (localFiles) {
+      if (localFiles !== null && localFiles.length > 0) {
         setFiles(localFiles)
         return
       }
@@ -24,7 +26,7 @@ export function useFiles () {
   }, [])
 
   useEffect(() => {
-    localforage.setItem('@MarkeeApp:files', files)
+    localforage.setItem(markeeAppLocalForageKey, files)
   }, [files])
 
   useEffect(() => {
@@ -38,18 +40,10 @@ export function useFiles () {
       }
 
       timeoutId = setTimeout(() => {
-        setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-          prevFile.active
-            ? { ...prevFile, status: 'saving' }
-            : prevFile,
-        ))
+        updateActiveFile({ status: 'saving' })
 
         const idTimeoutSavedStatus = setTimeout(() => {
-          setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-            prevFile.active
-              ? { ...prevFile, status: 'saved' }
-              : prevFile,
-          ))
+          updateActiveFile({ status: 'saved' })
           clearTimeout(idTimeoutSavedStatus)
         }, 300)
       }, 300)
@@ -89,20 +83,20 @@ export function useFiles () {
     })
   }
 
-  const updateActiveFileName = (newFileName: string) => {
+  const updateActiveFile = (updatedPropertiesInActiveFile: Partial<File>) => {
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.active
-        ? { ...prevFile, name: newFileName, status: 'editing' }
+        ? { ...prevFile, ...updatedPropertiesInActiveFile }
         : prevFile,
     ))
   }
 
+  const updateActiveFileName = (newFileName: string) => {
+    updateActiveFile({ name: newFileName, status: 'editing' })
+  }
+
   const updateActiveFileContent = (newFileContent: string) => {
-    setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
-      prevFile.active
-        ? { ...prevFile, content: newFileContent, status: 'editing' }
-        : prevFile,
-    ))
+    updateActiveFile({ content: newFileContent, status: 'editing' })
   }
 
   const updateActiveFileById = (id: string) => {
@@ -110,7 +104,6 @@ export function useFiles () {
     if (!newActiveFile) return
 
     inputRef.current?.focus()
-    window.history.replaceState(null, '', `/file/${id}`)
     setFiles((prevFiles) => prevFiles.map<File>((prevFile) =>
       prevFile.id === id
         ? { ...newActiveFile, active: true }

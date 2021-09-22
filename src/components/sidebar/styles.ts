@@ -1,5 +1,10 @@
 import styled, { css } from 'styled-components/macro'
 
+import {
+  LogoImg,
+  PlusIcon as AssetsPlusIcon,
+} from 'resources/assets'
+
 export const Container = styled.aside`${({ theme }) => css`
   background: ${theme.colors.black};
   padding: 2.4rem 0.8rem;
@@ -10,17 +15,21 @@ export const Container = styled.aside`${({ theme }) => css`
   align-items: center;
 
   @media(min-width: ${theme.mediaQuery.mq920}) {
+    flex-shrink: 0;
     width: 36rem;
     padding: 4.8rem 3.2rem;
   }
 `}`
 
-export const LogoImg = styled.img`
+export const Logo = styled(LogoImg)`
+  flex-shrink: 0;
   max-width: 100%;
   margin-bottom: 2.4rem;
 `
 
 export const Title = styled.h2`${({ theme }) => css`
+  margin-bottom: 2.4rem;
+
   display: flex;
   align-items: center;
   gap: 0.64rem;
@@ -56,13 +65,12 @@ export const Title = styled.h2`${({ theme }) => css`
 
 export const AddFileButton = styled.button`${({ theme }) => css`
   background: ${theme.colors.primary};
-  width: 100%;
-  max-width: 26.8rem;
+  width: 4.2rem;
+  height: 4.2rem;
 
   padding: 0.8rem;
   border: none;
-  border-radius: 4px;
-  margin: 2.4rem 0 3.2rem;
+  border-radius: 50%;
 
   display: flex;
   align-items: center;
@@ -71,29 +79,53 @@ export const AddFileButton = styled.button`${({ theme }) => css`
   font-size: 1.4rem;
   color: ${theme.colors.lightBlack};
   cursor: pointer;
-  transition: transform 0.2s ease-in-out, opacity 0.2s ease-in-out;
+  transition: opacity 0.2s ease-in-out;
 
   &:hover {
-    transform: scale(1.02, 1.02);
     opacity: 0.75;
+  }
+
+  position: fixed;
+  z-index: 10;
+  bottom: 1.6rem;
+  right: 1.6rem;
+
+  @media (min-width: ${theme.mediaQuery.mq920}) {
+    width: 100%;
+
+    position: unset;
+    border-radius: 4px;
+    margin-bottom: 3.2rem;
   }
 `}`
 
-export const PlusIcon = styled.img`
+export const PlusIcon = styled(AssetsPlusIcon)`
   flex-shrink: 0;
-  margin-right: 1.2rem;
+
+  @media (min-width: ${({ theme }) => theme.mediaQuery.mq920}) {
+    position: unset;
+    margin-right: 1.2rem;
+  }
 `
+
+export const ButtonText = styled.span`${({ theme }) => css`
+  display: none;
+
+  @media (min-width: ${theme.mediaQuery.mq920}) {
+    display: block;
+  }
+`}`
 
 export const Files = styled.ul`${({ theme }) => css`
   width: 100%;
-  padding-bottom: 0.8rem;
+  padding-bottom: 0.2rem;
   list-style: none;
 
   display: flex;
   overflow-x: auto;
 
   &::-webkit-scrollbar {
-    height: 4px;
+    height: 2px;
   }
 
   &::-webkit-scrollbar-thumb {
@@ -109,6 +141,16 @@ export const Files = styled.ul`${({ theme }) => css`
     width: 100%;
     flex-direction: column;
     overflow-x: initial;
+    overflow-y: scroll;
+    padding-bottom: 0;
+
+    &::-webkit-scrollbar {
+      width: 3.2px;
+      height: auto;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: ${theme.colors.lightBlack};
+    }
   }
-`}
-`
+`}`
