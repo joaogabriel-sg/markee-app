@@ -2,10 +2,20 @@
   <img src="./src/resources/assets/logo.svg" width="200" />
 </div>
 
-**Markee App** is a markdown editor developed during B.Academy's ReactJS Bootcamp.
+**Markee App** is a markdown editor developed during [B.Academy's ReactJS Bootcamp](https://brainn.co/).
+
+### [🟢 See live](https://markee-app-joaogabrielsg.netlify.app/)
 
 <p align="center">
-  <img width="70%" src="https://imgur.com/y9deLbF.png" />
+  <a href="https://markee-app-joaogabrielsg.netlify.app/" target="_blank" style="display: block;">
+    <img width="70%" src="https://imgur.com/BeXJJnY.png" />
+  </a>
+  <a href="https://markee-app-joaogabrielsg.netlify.app/" target="_blank" style="display: block;">
+    <img width="70%" src="https://imgur.com/Lv2MLZe.png" />
+  </a>
+  <a href="https://markee-app-joaogabrielsg.netlify.app/" target="_blank" style="display: block;">
+    <img width="70%" src="https://imgur.com/NnQrCUI.png" />
+  </a>
 </p>
 
 # 🎮 Getting started
@@ -55,6 +65,9 @@ Builds the app for production to the `build` folder.
 - React
 - TypeScript
 - Styled Components
+- LocalForage
+- Marked
+- Highlight.js
 - Husky
 - ESLint
 - EditorConfig
